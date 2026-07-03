@@ -42,475 +42,854 @@
 
   --white:#ffffff;
 
-  /* FIXED: removed backdrop-filter from glass-bg — backdrop-filter creates GPU
-     stacking contexts that bleed through translateX() on hosted environments */
-  --glass-bg:rgba(255,255,255,0.95);
+  --glass-bg:rgba(255,255,255,0.68);
+
   --glass-border:rgba(29,78,216,0.14);
 
   --shadow-sm:0 2px 8px rgba(11,31,58,0.06);
+
   --shadow-md:0 8px 28px rgba(11,31,58,0.10);
+
   --shadow-lg:0 20px 50px rgba(11,31,58,0.16);
 
+
+
   --route-primary:#dc2626;
+
   --route-secondary:#2563eb;
+
   --route-chak:#16a34a;
+
   --route-kuth:#f59e0b;
+
   --route-neutral:#64748b;
 
+
+
   --node-switch:#1d4ed8;
+
   --node-switch-core:#0b1f3a;
+
   --node-place:#94a3b8;
+
   --node-place-bg:#eef1f6;
 
+
+
   --font-display:'Space Grotesk',sans-serif;
+
   --font-body:'Inter',sans-serif;
+
   --font-mono:'JetBrains Mono',monospace;
 
+
+
   --radius-lg:20px;
+
   --radius-md:14px;
+
   --radius-sm:9px;
+
 }
+
+
 
 html[data-theme="dark"]{
 
   --slate-50:#0a1424;
+
   --slate-100:#0f1c30;
+
   --slate-200:#16273f;
+
   --white:#0d1729;
-  --glass-bg:rgba(15,28,48,0.97);
+
+  --glass-bg:rgba(15,28,48,0.72);
+
   --glass-border:rgba(96,148,255,0.16);
+
   --ink-900:#eef3fb;
+
   --ink-700:#c6d4e8;
+
   --ink-500:#8ea3c2;
+
   --ink-300:#5a729a;
+
   --node-place-bg:#16273f;
+
   --shadow-sm:0 2px 8px rgba(0,0,0,0.35);
+
   --shadow-md:0 8px 28px rgba(0,0,0,0.4);
+
   --shadow-lg:0 20px 50px rgba(0,0,0,0.5);
+
 }
 
+
+
 *{box-sizing:border-box;}
+
 html,body{margin:0;padding:0;}
 
 body{
+
   font-family:var(--font-body);
+
   background:
+
     radial-gradient(circle at 12% 8%, var(--blue-100) 0%, transparent 38%),
+
     var(--slate-50);
+
   color:var(--ink-900);
+
   min-height:100vh;
+
   transition:background .35s ease,color .35s ease;
+
 }
 
 html[data-theme="dark"] body{
+
   background:
+
     radial-gradient(circle at 12% 8%, rgba(37,99,235,0.12) 0%, transparent 40%),
+
     var(--slate-50);
+
 }
 
+
+
 ::selection{background:var(--blue-100);}
+
 button{font-family:var(--font-body);cursor:pointer;}
+
 input,select{font-family:var(--font-body);}
 
+
+
 .mono{font-family:var(--font-mono);}
+
+
 
 /* ===================== LAYOUT ===================== */
 
 .shell{max-width:1500px;margin:0 auto;padding:20px 24px 60px;}
 
+
+
 /* ---- Top bar ---- */
 
 .topbar{
+
   display:flex;align-items:center;justify-content:space-between;gap:20px;
+
   flex-wrap:wrap;
+
   margin-bottom:18px;
+
 }
+
 .brand{display:flex;align-items:center;gap:12px;}
+
 .brand-mark{
+
   width:44px;height:44px;border-radius:12px;
+
   background:linear-gradient(145deg,var(--blue-600),var(--ink-900));
+
   display:flex;align-items:center;justify-content:center;
+
   box-shadow:var(--shadow-sm);
+
   flex-shrink:0;
+
 }
+
 .brand-mark svg{width:24px;height:24px;}
+
 .brand-text h1{
+
   font-family:var(--font-display);font-size:19px;font-weight:700;margin:0;
+
   letter-spacing:-0.01em;color:var(--ink-900);
+
 }
+
 .brand-text p{margin:1px 0 0;font-size:11.5px;color:var(--ink-500);letter-spacing:.03em;text-transform:uppercase;font-weight:500;}
+
+
 
 .topbar-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 
+
+
 .search-wrap{
+
   position:relative;display:flex;align-items:center;
+
 }
+
 .search-wrap svg{position:absolute;left:13px;width:15px;height:15px;color:var(--ink-500);pointer-events:none;}
+
 #searchInput{
+
   width:230px;padding:10px 14px 10px 36px;border-radius:999px;
+
   border:1px solid var(--glass-border);background:var(--glass-bg);
-  color:var(--ink-900);font-size:13px;
+
+  backdrop-filter:blur(10px);color:var(--ink-900);font-size:13px;
+
   box-shadow:var(--shadow-sm);transition:width .25s ease, box-shadow .2s ease;
+
 }
+
 #searchInput:focus{outline:none;width:280px;box-shadow:0 0 0 3px var(--blue-100);}
+
 #searchInput::placeholder{color:var(--ink-300);}
 
+
+
 .icon-btn{
+
   width:38px;height:38px;border-radius:11px;border:1px solid var(--glass-border);
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(10px);
+
   display:flex;align-items:center;justify-content:center;
+
   box-shadow:var(--shadow-sm);transition:transform .15s ease, box-shadow .15s ease;
+
   color:var(--ink-700);
+
 }
+
 .icon-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);color:var(--blue-600);}
+
 .icon-btn svg{width:17px;height:17px;}
+
 .icon-btn.active{background:var(--blue-600);color:#fff;border-color:var(--blue-600);}
+
+
 
 /* ===================== STAT CARDS ===================== */
 
 .stats-grid{
+
   display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:18px;
+
 }
+
 @media(max-width:1100px){.stats-grid{grid-template-columns:repeat(4,1fr);}}
+
 @media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
 
+
+
 .stat-card{
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(10px);
+
   border:1px solid var(--glass-border);border-radius:var(--radius-md);
+
   padding:14px 16px;box-shadow:var(--shadow-sm);
+
   opacity:0;animation:fadeUp .5s ease forwards;
+
 }
+
 .stat-card .val{
+
   font-family:var(--font-mono);font-size:22px;font-weight:600;color:var(--ink-900);
+
   line-height:1.1;
+
 }
+
 .stat-card .lbl{font-size:11px;color:var(--ink-500);margin-top:4px;font-weight:500;letter-spacing:.01em;}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+
 
 /* ===================== MAIN GRID ===================== */
 
 .main-grid{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start;}
+
 @media(max-width:980px){.main-grid{grid-template-columns:1fr;}}
+
+
 
 /* ---- Topology panel ---- */
 
 .topo-card{
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(10px);
+
   border:1px solid var(--glass-border);border-radius:var(--radius-lg);
+
   box-shadow:var(--shadow-md);overflow:hidden;position:relative;
+
 }
+
 .topo-head{
+
   display:flex;align-items:center;justify-content:space-between;
+
   padding:16px 18px 10px;flex-wrap:wrap;gap:10px;
+
 }
+
 .topo-head h2{font-family:var(--font-display);font-size:15px;margin:0;font-weight:600;}
+
 .topo-head .sub{font-size:11.5px;color:var(--ink-500);margin-top:2px;}
+
 .topo-controls{display:flex;gap:6px;}
 
+
+
 #svgHost{
+
   width:100%;height:640px;cursor:grab;touch-action:none;
+
   background:
+
     linear-gradient(var(--slate-100) 1px, transparent 1px) 0 0/28px 28px,
+
     linear-gradient(90deg, var(--slate-100) 1px, transparent 1px) 0 0/28px 28px,
+
     var(--slate-50);
+
   transition:background .35s ease;
+
 }
+
 #svgHost:active{cursor:grabbing;}
+
 #topoSvg{width:100%;height:100%;display:block;}
 
-/* FIXED: removed filter:drop-shadow from .highlighted and .route-active.
-   SVG filter on :hover / class states creates GPU layers that persist after
-   class removal on certain rendering engines (Chrome on Cloudflare-hosted pages
-   with compression enabled). Replaced with stroke-based highlighting. */
 
-/* pulse ring animation — kept, purely decorative on switch nodes */
+
+/* node + edge base styling done via JS inline attrs, keyframes below */
+
 .pulse-ring{animation:pulse 2.4s ease-in-out infinite;}
+
 @keyframes pulse{
+
   0%{opacity:.55;transform:scale(1);}
+
   70%{opacity:0;transform:scale(1.55);}
+
   100%{opacity:0;transform:scale(1.55);}
+
 }
 
 .node-group{cursor:pointer;}
 
-/* FIXED: simplified hover — pure scale, no filter, no drop-shadow.
-   transform-box:fill-box scales from SVG element center (not SVG origin).
-   will-change:transform avoids layout recalc. No filter = no GPU layer leak. */
+
+
+/* =====================================================
+
+   HOVER EFFECT — ONLY CHANGE FROM ORIGINAL
+
+   Removed: filter drop-shadow, scale(1.035)
+
+   Removed: floating/shadow effects
+
+   Added: simple scale(1.05) from center, 0.25s ease
+
+   transform-box: fill-box ensures SVG scale from center
+
+   isolation: isolate prevents any stacking/layout effect
+
+   will-change: transform avoids layout recalculation
+
+====================================================== */
+
 .node-group .node-shape{
-  transition: transform 0.2s ease;
+
+  transition: transform 0.25s ease;
+
   transform-origin: center;
+
   transform-box: fill-box;
+
   will-change: transform;
+
 }
+
 .node-group:hover .node-shape{
-  transform: scale(1.06);
+
+  transform: scale(1.05);
+
 }
 
-/* FIXED: removed filter:drop-shadow — replaced with stroke outline for highlighting */
-.node-group.dimmed{opacity:.18;}
 
-.node-group.highlighted .node-shape{
-  stroke: #f59e0b !important;
-  stroke-width: 2.5 !important;
-}
 
-.node-group.route-active .node-shape{
-  stroke: #dc2626 !important;
-  stroke-width: 2.5 !important;
-}
+.node-group.dimmed{opacity:.16;}
+
+.node-group.highlighted .node-shape{filter:drop-shadow(0 0 14px rgba(245,158,11,0.85));}
+
+.node-group.route-active .node-shape{filter:drop-shadow(0 0 14px rgba(220,38,38,0.7));}
+
+
 
 .edge-line{transition:opacity .18s ease, stroke-width .18s ease;}
+
 .edge-line.dimmed{opacity:.12;}
 
-/* FIXED: removed filter:drop-shadow from route-active edge */
-.edge-line.route-active{stroke-width:5;}
+.edge-line.route-active{stroke-width:5;filter:drop-shadow(0 0 6px rgba(220,38,38,0.55));}
 
-.flow-dot{} /* FIXED: removed filter:drop-shadow(0 0 3px currentColor) */
+.flow-dot{filter:drop-shadow(0 0 3px currentColor);}
+
+
 
 .topo-footer{
+
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+
   padding:10px 18px 16px;font-size:11px;color:var(--ink-500);
+
 }
+
+
 
 /* ---- Legend ---- */
 
 .legend{
+
   display:flex;flex-wrap:wrap;gap:12px 18px;padding:0 18px 14px;
+
 }
+
 .legend-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-700);}
+
 .legend-swatch{width:16px;height:9px;border-radius:3px;flex-shrink:0;}
+
 .legend-swatch.line{height:3px;border-radius:2px;}
 
-/* ===================== SIDE PANEL ===================== */
+.legend-swatch.dashed{background:repeating-linear-gradient(90deg,currentColor 0 5px,transparent 5px 9px);height:3px;}
+
+
+
+/* ===================== SIDE PANEL (route explorer + info) ===================== */
 
 .side-col{display:flex;flex-direction:column;gap:16px;}
+
 .panel{
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(10px);
+
   border:1px solid var(--glass-border);border-radius:var(--radius-lg);
+
   box-shadow:var(--shadow-md);padding:16px 18px;
+
 }
+
 .panel h3{
+
   font-family:var(--font-display);font-size:13.5px;margin:0 0 12px;font-weight:600;
+
   display:flex;align-items:center;gap:7px;
+
 }
+
 .panel h3 svg{width:15px;height:15px;color:var(--blue-600);}
 
+
+
 .field{margin-bottom:10px;}
+
 .field label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);margin-bottom:5px;font-weight:600;}
+
 .field select{
+
   width:100%;padding:9px 10px;border-radius:9px;border:1px solid var(--glass-border);
+
   background:var(--white);color:var(--ink-900);font-size:12.5px;
+
 }
+
 .btn-primary{
+
   width:100%;padding:10px;border:none;border-radius:10px;
+
   background:linear-gradient(135deg,var(--blue-600),var(--ink-900));
+
   color:#fff;font-weight:600;font-size:12.5px;letter-spacing:.01em;
+
   box-shadow:var(--shadow-sm);transition:transform .15s ease,box-shadow .15s ease;
+
 }
+
 .btn-primary:hover{transform:translateY(-1px);box-shadow:var(--shadow-md);}
+
 .btn-ghost{
+
   width:100%;padding:8px;border-radius:10px;margin-top:6px;font-size:11.5px;
+
   border:1px solid var(--glass-border);background:transparent;color:var(--ink-500);font-weight:500;
+
 }
+
 .btn-ghost:hover{color:var(--ink-900);border-color:var(--ink-300);}
 
+
+
 .route-result{margin-top:12px;border-top:1px dashed var(--glass-border);padding-top:12px;display:none;}
+
 .route-result.show{display:block;animation:fadeUp .35s ease;}
+
 .route-summary{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+
 .route-pill{
+
   font-family:var(--font-mono);font-size:11px;background:var(--slate-100);
+
   padding:5px 9px;border-radius:8px;color:var(--ink-700);
+
 }
+
 .route-hops{display:flex;flex-direction:column;gap:0;}
+
 .route-hop{
+
   display:flex;align-items:center;gap:8px;font-size:12px;padding:5px 0;position:relative;
+
 }
+
 .route-hop .dot{width:7px;height:7px;border-radius:50%;background:var(--blue-600);flex-shrink:0;}
+
 .route-hop .seg{color:var(--ink-500);font-size:10.5px;font-family:var(--font-mono);margin-left:auto;}
+
 .route-hop-name{font-weight:500;}
+
+
 
 .empty-note{font-size:12px;color:var(--ink-500);line-height:1.5;}
 
+
+
 /* ---- floating info drawer ---- */
 
-/* FIXED: removed backdrop-filter:blur(18px) — this was the primary cause of
-   the ghost-overlay bug. When the panel translates off-screen, the blur filter's
-   GPU compositing layer remained active on some renderers, casting a grey tint
-   over the SVG beneath it. On localhost, Chrome's GPU process is isolated and
-   repaints correctly; on hosted servers behind Cloudflare, the page gets
-   additional HTTP headers (COEP/COOP) that change the rendering context,
-   exposing this compositor bug. */
 #infoPanel{
+
   position:fixed;top:0;right:0;height:100vh;width:380px;max-width:92vw;
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(18px);
+
   border-left:1px solid var(--glass-border);
+
   box-shadow:-16px 0 40px rgba(11,31,58,0.18);
+
   transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+
   z-index:80;padding:22px 22px 30px;overflow-y:auto;
+
 }
+
 #infoPanel.open{transform:translateX(0);}
 
 .info-close{
+
   position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:9px;
+
   border:1px solid var(--glass-border);background:var(--white);
+
   display:flex;align-items:center;justify-content:center;color:var(--ink-700);
+
 }
+
 .info-badge{
+
   display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;
+
   font-size:10.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;
+
   margin-bottom:12px;
+
 }
+
 .info-badge.switch{background:rgba(29,78,216,0.12);color:var(--blue-600);}
+
 .info-badge.place{background:rgba(100,116,139,0.14);color:var(--ink-500);}
+
 #infoPanel h2{font-family:var(--font-display);font-size:20px;margin:0 0 4px;padding-right:30px;}
+
 .info-status{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#16a34a;font-weight:600;margin-bottom:16px;}
+
 .info-status .sd{width:7px;height:7px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.18);}
 
+
+
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
+
 .info-tile{background:var(--slate-100);border-radius:11px;padding:10px 12px;}
+
 .info-tile .t-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);font-weight:600;}
+
 .info-tile .t-val{font-family:var(--font-mono);font-size:14.5px;margin-top:3px;color:var(--ink-900);font-weight:600;}
 
+
+
 .info-section{margin-bottom:16px;}
+
 .info-section h4{
+
   font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);
+
   margin:0 0 8px;font-weight:700;
+
 }
+
 .link-row{
+
   display:flex;align-items:center;justify-content:space-between;
+
   padding:8px 10px;background:var(--slate-100);border-radius:9px;margin-bottom:6px;font-size:12px;
+
 }
+
 .link-row .ln{font-weight:500;}
+
 .link-row .lm{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-500);}
+
 .advisory{
+
   background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);
+
   border-radius:10px;padding:10px 12px;font-size:11.5px;color:#92400e;line-height:1.5;
+
 }
+
 html[data-theme="dark"] .advisory{color:#fbbf24;}
+
+
 
 /* ===================== TOOLTIP ===================== */
 
 #tooltip{
+
   position:fixed;pointer-events:none;background:var(--ink-900);color:#fff;
+
   font-size:11px;padding:6px 10px;border-radius:7px;z-index:90;opacity:0;
+
   transition:opacity .12s ease;font-family:var(--font-mono);white-space:nowrap;
+
   box-shadow:var(--shadow-md);
+
 }
+
 #tooltip.show{opacity:1;}
 
-/* FIXED: overlay is now a plain semi-transparent div.
-   Removed backdrop-filter:blur(3px) from .modal-overlay which was causing
-   a separate stacking context that didn't clean up properly after modal close.
-   The overlay element itself had opacity:0 as its "hidden" state, which on some
-   renderers (especially with the compositing layer already allocated for backdrop-filter)
-   kept a ghost layer active even at opacity:0 with pointer-events:none. */
+
+
+/* overlay when info panel open on mobile */
+
 #overlay{
+
   position:fixed;inset:0;background:rgba(11,31,58,0.25);z-index:70;
-  display:none;
+
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+
 }
-#overlay.show{display:block;}
+
+#overlay.show{opacity:1;pointer-events:auto;}
+
+
 
 /* footer note */
+
 .footnote{
+
   margin-top:22px;font-size:11px;color:var(--ink-300);text-align:center;line-height:1.6;
+
 }
+
+
 
 /* ===================== PRINT ===================== */
 
 @media print{
+
   .topbar-actions, .topo-controls, #infoPanel, #overlay, #tooltip, .side-col, .admin-toolbar, #adminBadge, .admin-edit-panel{display:none !important;}
+
   body{background:#fff;}
+
   .main-grid{grid-template-columns:1fr;}
+
   .topo-card{box-shadow:none;border:1px solid #ccc;}
+
   #svgHost{height:auto;background:#fff;}
+
 }
+
+
 
 /* ===================== ADMIN SYSTEM ===================== */
 
 .admin-btn{
+
   display:flex;align-items:center;gap:6px;padding:0 14px;height:38px;border-radius:11px;
-  border:1px solid var(--glass-border);background:var(--glass-bg);
+
+  border:1px solid var(--glass-border);background:var(--glass-bg);backdrop-filter:blur(10px);
+
   color:var(--ink-700);font-size:12.5px;font-weight:600;box-shadow:var(--shadow-sm);
+
   transition:transform .15s ease, box-shadow .15s ease;
+
 }
+
 .admin-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+
 .admin-btn.on{background:linear-gradient(135deg,#16a34a,#0b1f3a);color:#fff;border-color:transparent;}
 
+
+
 #adminBadge{
+
   position:fixed;top:16px;right:16px;z-index:200;
+
   display:none;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+
   background:rgba(22,163,74,0.14);border:1px solid rgba(22,163,74,0.4);color:#15803d;
+
   font-size:12px;font-weight:700;letter-spacing:.02em;box-shadow:var(--shadow-md);
+
+  backdrop-filter:blur(10px);
+
 }
+
 #adminBadge .dot{width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,0.25);animation:pulse 2s ease-in-out infinite;}
+
 html[data-theme="dark"] #adminBadge{background:rgba(22,163,74,0.18);color:#4ade80;}
+
+
 
 /* ---- Modal overlay (shared) ---- */
 
-/* FIXED: removed backdrop-filter:blur(3px) from .modal-overlay */
 .modal-overlay{
+
   position:fixed;inset:0;background:rgba(11,31,58,0.45);z-index:300;
-  display:none;align-items:center;justify-content:center;
+
+  display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px);
+
 }
+
 .modal-overlay.show{display:flex;}
+
 .modal-box{
+
   width:340px;max-width:90vw;background:var(--white);border-radius:var(--radius-lg);
+
   box-shadow:var(--shadow-lg);padding:22px;border:1px solid var(--glass-border);
+
   animation:fadeUp .25s ease;
+
 }
+
 .modal-box h3{font-family:var(--font-display);font-size:15px;margin:0 0 14px;font-weight:700;}
+
 .modal-box input[type="password"], .modal-box input[type="text"], .modal-box input[type="number"], .modal-box select, .modal-box textarea{
+
   width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--glass-border);
+
   background:var(--slate-50);color:var(--ink-900);font-size:13px;margin-bottom:10px;
+
 }
+
 .modal-box textarea{resize:vertical;min-height:60px;font-family:var(--font-body);}
+
 .modal-msg{font-size:12px;color:#dc2626;min-height:16px;margin-bottom:6px;}
+
 .modal-actions{display:flex;gap:8px;margin-top:6px;}
+
 .modal-actions .btn-primary, .modal-actions .btn-ghost{margin-top:0;}
+
 .color-swatch-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+
 .color-swatch{width:26px;height:26px;border-radius:8px;border:2px solid transparent;cursor:pointer;}
+
 .color-swatch.sel{border-color:var(--ink-900);}
+
+
 
 /* ---- Floating admin toolbar ---- */
 
 .admin-toolbar{
+
   position:fixed;left:50%;bottom:20px;transform:translateX(-50%);
+
   display:none;flex-wrap:wrap;gap:6px;max-width:94vw;
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(16px);
+
   border:1px solid var(--glass-border);border-radius:16px;
+
   box-shadow:var(--shadow-lg);padding:10px;z-index:150;
+
   justify-content:center;
+
 }
+
 .admin-toolbar.show{display:flex;}
+
 .admin-toolbar button{
+
   border:1px solid transparent;background:transparent;border-radius:9px;
+
   padding:7px 10px;font-size:12px;color:var(--ink-700);font-weight:500;
+
   display:flex;align-items:center;gap:5px;white-space:nowrap;
+
 }
+
 .admin-toolbar button:hover{background:var(--slate-100);}
+
 .admin-toolbar button.active-tool{background:var(--blue-600);color:#fff;}
+
 .admin-toolbar .sep{width:1px;background:var(--glass-border);margin:4px 2px;}
+
+
 
 /* ---- Admin edit panel (slides from left) ---- */
 
-/* FIXED: removed backdrop-filter:blur(18px) */
 .admin-edit-panel{
+
   position:fixed;top:0;left:0;height:100vh;width:340px;max-width:90vw;
-  background:var(--glass-bg);
+
+  background:var(--glass-bg);backdrop-filter:blur(18px);
+
   border-right:1px solid var(--glass-border);
+
   box-shadow:16px 0 40px rgba(11,31,58,0.18);
+
   transform:translateX(-100%);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+
   z-index:160;padding:20px;overflow-y:auto;
+
 }
+
 .admin-edit-panel.open{transform:translateX(0);}
+
 .admin-edit-panel h3{font-family:var(--font-display);font-size:14px;margin:0 0 14px;display:flex;justify-content:space-between;align-items:center;}
+
 .admin-edit-panel label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-500);margin:10px 0 5px;font-weight:600;}
+
 .admin-edit-panel .close-x{width:26px;height:26px;border-radius:8px;border:1px solid var(--glass-border);background:var(--white);display:flex;align-items:center;justify-content:center;}
+
 .tool-hint{
+
   position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:150;
+
   background:var(--ink-900);color:#fff;padding:8px 16px;border-radius:999px;
+
   font-size:12px;font-weight:600;box-shadow:var(--shadow-md);display:none;
+
 }
+
 .tool-hint.show{display:block;}
 
 </style>
@@ -519,1381 +898,2626 @@ html[data-theme="dark"] #adminBadge{background:rgba(22,163,74,0.18);color:#4ade8
 
 <body>
 
+
+
 <div id="overlay" onclick="closeInfoPanel()"></div>
+
 <div id="tooltip"></div>
+
+
 
 <div class="shell">
 
-  <!-- ===================== TOP BAR ===================== -->
+
+
   <div class="topbar">
+
     <div class="brand">
+
       <div class="brand-mark">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><circle cx="7" cy="7.5" r="1" fill="#fff"/><circle cx="7" cy="16.5" r="1" fill="#fff"/></svg>
+
       </div>
+
       <div class="brand-text">
+
         <h1>Kannur Vision</h1>
+
         <p>Core Backbone Documentation Portal</p>
+
       </div>
+
     </div>
+
     <div class="topbar-actions">
+
       <button class="admin-btn" id="adminAccessBtn" onclick="openAdminLogin()">🔒 Admin Access</button>
+
       <div class="search-wrap">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+
         <input id="searchInput" type="text" placeholder="Search switch, place, node…" oninput="handleSearch(this.value)">
+
       </div>
+
       <button class="icon-btn" title="Fullscreen" onclick="toggleFullscreen()">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+
       </button>
+
       <button class="icon-btn" title="Print" onclick="window.print()">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z"/></svg>
+
       </button>
+
       <button class="icon-btn" title="Export SVG diagram" onclick="exportSVG()">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+
       </button>
+
       <button class="icon-btn" id="themeBtn" title="Toggle dark mode" onclick="toggleTheme()">
+
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+
       </button>
+
     </div>
+
   </div>
 
-  <!-- ===================== STAT CARDS ===================== -->
+
+
   <div class="stats-grid" id="statsGrid"></div>
 
-  <!-- ===================== MAIN GRID ===================== -->
+
+
   <div class="main-grid">
 
-    <!-- ---- topology ---- -->
+
+
     <div class="topo-card">
+
       <div class="topo-head">
+
         <div>
+
           <h2>Live Topology Map</h2>
+
           <div class="sub">Redrawn from field survey · drag to pan · scroll to zoom</div>
+
         </div>
+
         <div class="topo-controls">
+
           <button class="icon-btn" title="Zoom in" onclick="zoomBy(1.25)">
+
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>
+
           </button>
+
           <button class="icon-btn" title="Zoom out" onclick="zoomBy(0.8)">
+
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg>
+
           </button>
+
           <button class="icon-btn" title="Fit to screen" onclick="fitToScreen()">
+
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+
           </button>
+
           <button class="icon-btn" title="Reset view" onclick="resetView()">
+
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+
           </button>
+
         </div>
+
       </div>
+
+
 
       <div id="svgHost">
+
         <svg id="topoSvg" viewBox="0 0 1450 1400" xmlns="http://www.w3.org/2000/svg"></svg>
+
       </div>
+
+
 
       <div class="legend" id="legendRow"></div>
+
       <div class="topo-footer">
+
         <span>29 nodes · 31 fiber links · click any node for full documentation</span>
+
         <span class="mono" id="zoomReadout">Zoom 100%</span>
+
       </div>
+
     </div>
 
-    <!-- ---- side column ---- -->
+
+
     <div class="side-col">
+
       <div class="panel">
+
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 20l-5.5-2V4L9 6m0 14l6 2m-6-2V6m6 16l5.5-2V6L15 4m0 16V4m0 2L9 4"/></svg>Route Explorer</h3>
+
         <div class="field">
+
           <label>Start Node</label>
+
           <select id="startSelect"></select>
+
         </div>
+
         <div class="field">
+
           <label>Destination</label>
+
           <select id="endSelect"></select>
+
         </div>
+
         <button class="btn-primary" onclick="findRoute()">Find Route</button>
+
         <button class="btn-ghost" onclick="clearRoute()">Clear Route</button>
 
+
+
         <div class="route-result" id="routeResult">
+
           <div class="route-summary">
+
             <span class="route-pill" id="rHops">0 hops</span>
+
             <span class="route-pill" id="rDist">0 km</span>
+
             <span class="route-pill" id="rBw">0 Gbps</span>
+
           </div>
+
           <div class="route-hops" id="routeHops"></div>
+
         </div>
+
       </div>
+
+
 
       <div class="panel">
+
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Node Documentation</h3>
+
         <p class="empty-note">Select any switch or transit place on the map to view incoming / outgoing links, bandwidth, distance and route status.</p>
+
       </div>
+
     </div>
 
+
+
   </div>
+
+
 
   <div class="footnote">
+
     Distances are estimated survey figures for internal documentation purposes, calibrated against verified road-distance data<br>
+
     for the Kannur–Kuthuparamba corridor. Verify exact chainage on site before provisioning.
+
   </div>
+
 </div>
 
-<!-- ===================== FLOATING INFO PANEL ===================== -->
+
+
 <div id="infoPanel">
+
   <button class="info-close" onclick="closeInfoPanel()">
+
     <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+
   </button>
+
   <div id="infoContent"></div>
+
 </div>
 
-<!-- ===================== ADMIN MODE BADGE ===================== -->
+
+
 <div id="adminBadge"><span class="dot"></span>🟢 Admin Mode Active</div>
 
-<!-- ===================== TOOL HINT ===================== -->
+
+
 <div id="toolHint" class="tool-hint"></div>
 
-<!-- ===================== ADMIN LOGIN MODAL ===================== -->
+
+
 <div class="modal-overlay" id="loginModal">
+
   <div class="modal-box">
+
     <h3>🔒 Admin Access</h3>
+
     <input type="password" id="adminPasswordInput" placeholder="Enter admin password" onkeydown="if(event.key==='Enter')submitAdminLogin()">
+
     <div class="modal-msg" id="loginMsg"></div>
+
     <div class="modal-actions">
+
       <button class="btn-primary" onclick="submitAdminLogin()">Unlock</button>
+
       <button class="btn-ghost" onclick="closeModal('loginModal')">Cancel</button>
+
     </div>
+
   </div>
+
 </div>
 
-<!-- ===================== ROUTE CREATION MODAL ===================== -->
+
+
 <div class="modal-overlay" id="routeModal">
+
   <div class="modal-box">
+
     <h3>🔗 New Route</h3>
+
     <label style="font-size:10.5px;text-transform:uppercase;color:var(--ink-500);font-weight:600;">Bandwidth</label>
+
     <select id="routeBwSelect">
+
       <option value="100">100 Gbps</option>
+
       <option value="200">200 Gbps</option>
+
       <option value="400">400 Gbps</option>
+
       <option value="custom">Custom…</option>
+
     </select>
+
     <input type="number" id="routeBwCustom" placeholder="Custom Gbps" style="display:none;">
+
     <label style="font-size:10.5px;text-transform:uppercase;color:var(--ink-500);font-weight:600;">Route Color</label>
+
     <div class="color-swatch-row" id="routeColorRow"></div>
+
     <div class="modal-actions">
+
       <button class="btn-primary" onclick="confirmCreateRoute()">Create Route</button>
+
       <button class="btn-ghost" onclick="closeModal('routeModal')">Cancel</button>
+
     </div>
+
   </div>
+
 </div>
 
-<!-- ===================== EDGE COLOR MODAL ===================== -->
+
+
 <div class="modal-overlay" id="edgeColorModal">
+
   <div class="modal-box">
+
     <h3>🎨 Change Route Color</h3>
+
     <div class="color-swatch-row" id="edgeColorRow"></div>
+
     <div class="modal-actions">
+
       <button class="btn-ghost" onclick="closeModal('edgeColorModal')">Close</button>
+
     </div>
+
   </div>
+
 </div>
 
-<!-- ===================== ADMIN NODE EDIT PANEL ===================== -->
+
+
 <div class="admin-edit-panel" id="adminEditPanel">
+
   <h3><span>✏ Edit Node</span><button class="close-x" onclick="closeAdminEditPanel()">✕</button></h3>
+
   <label>Node Name</label>
+
   <input type="text" id="editName">
+
   <label>Node Type</label>
+
   <select id="editType">
+
     <option value="switch">Switch</option>
+
     <option value="place">Transit Place</option>
+
   </select>
+
   <label>Bandwidth</label>
+
   <input type="text" id="editBandwidth" placeholder="e.g. 100 Gbps">
+
   <label>Status</label>
+
   <select id="editStatus">
+
     <option value="active">Active</option>
+
     <option value="degraded">Degraded</option>
+
     <option value="offline">Offline</option>
+
   </select>
+
   <label>Description</label>
+
   <textarea id="editDescription" placeholder="Short description…"></textarea>
+
   <label>Latitude</label>
+
   <input type="text" id="editLat" placeholder="e.g. 11.8745">
+
   <label>Longitude</label>
+
   <input type="text" id="editLng" placeholder="e.g. 75.3704">
+
   <label>Notes</label>
+
   <textarea id="editNotes" placeholder="Internal notes…"></textarea>
+
   <div class="modal-actions" style="margin-top:14px;">
+
     <button class="btn-primary" onclick="applyNodeEdit()">Apply</button>
+
     <button class="btn-ghost" onclick="closeAdminEditPanel()">Close</button>
+
   </div>
+
 </div>
 
-<!-- ===================== ADMIN FLOATING TOOLBAR ===================== -->
+
+
 <div class="admin-toolbar" id="adminToolbar">
+
   <button data-tool="createSwitch" onclick="setTool('createSwitch')">➕ Create New Switch</button>
+
   <button data-tool="createPlace" onclick="setTool('createPlace')">📍 Create Transit Place</button>
+
   <button data-tool="createRoute" onclick="setTool('createRoute')">🔗 Create Route</button>
+
   <button data-tool="moveNode" onclick="setTool('moveNode')">↔ Create Connection</button>
+
   <div class="sep"></div>
+
   <button onclick="editSelectedNode()">✏ Edit Selected Node</button>
+
   <button onclick="renameSelectedNode()">📝 Rename Node</button>
+
   <button onclick="setTool('changeColor')">🎨 Change Route Color</button>
+
   <button data-tool="moveOnly" onclick="setTool('moveOnly')">📦 Move Node</button>
+
   <div class="sep"></div>
+
   <button onclick="deleteSelectedNode()">🗑 Delete Selected Node</button>
+
   <button data-tool="deleteConnection" onclick="setTool('deleteConnection')">✂ Delete Connection</button>
+
   <div class="sep"></div>
+
   <button onclick="saveChanges()">💾 Save Changes</button>
+
   <button onclick="cancelChanges()">❌ Cancel Changes</button>
+
   <button onclick="undoChange()">↩ Undo</button>
+
   <button onclick="redoChange()">↪ Redo</button>
+
   <div class="sep"></div>
+
   <button onclick="exportJSON()">📤 Export JSON</button>
+
   <button onclick="document.getElementById('importJsonInput').click()">📥 Import JSON</button>
+
   <input type="file" id="importJsonInput" accept="application/json" style="display:none" onchange="importJSON(this.files[0])">
+
   <button onclick="exportSVG()">🖼 Download SVG</button>
+
   <button onclick="exportPNG()">📷 Export PNG</button>
+
 </div>
+
+
+
 
 
 <script>
+
 /* =========================================================
+
    KANNUR VISION — TOPOLOGY DATA MODEL
+
    Node coordinates are laid out on a 1450x1400 SVG canvas.
+
    Distances (km) are approximate documentation-grade survey
+
    figures, not GPS-surveyed chainage.
+
 ========================================================= */
+
 const NODES = [
+
   {id:'kannur_main', name:'Kannur Main Switch', type:'switch', cat:'core', x:900, y:60},
 
+
+
   // Primary (red) chain
+
   {id:'mele_chovva', name:'Mele Chovva', type:'place', x:550, y:180},
+
   {id:'kanhirode', name:'Kanhirode', type:'place', x:550, y:280},
-  {id:'chala', name:'Chala', type:'place', x:550, y:380},
+
+  {id:'choola', name:'choola', type:'place', x:550, y:380},
+
   {id:'chakkarakkal_place', name:'Chakkarakkal', type:'place', x:550, y:480,
+
     note:'Transit place — distinct from Chakkarakkal Switch further down the secondary route. Verify naming before change requests.'},
-  {id:'anjarakandy', name:'Anjarakandy', type:'place', x:560, y:610,
-    note:'Junction node. Source topology sketch repeated this label twice; treated here as a single hub fed by both the primary route (from Chala) and the green output of Chakkarakkal Switch.'},
-  {id:'vengad', name:'Vengad', type:'place', x:400, y:700},
-  {id:'ambilad', name:'Ambilad', type:'place', x:400, y:800},
+
+  {id:'anjarakandy', name:'Anjarakandy', type:'place', x:430, y:600,
+
+    note:'Junction node. Source topology sketch repeated this label twice; treated here as a single hub fed by both the primary route (from choola) and the green output of Chakkarakkal Switch.'},
+
+  {id:'vengad', name:'Vengad', type:'place', x:430, y:700},
+
+  {id:'ambilad', name:'Ambilad', type:'place', x:430, y:800},
+
   {id:'airport', name:'Kannur Airport Junction', type:'place', x:150, y:800},
+
   {id:'mattannur', name:'Mattannur', type:'place', x:150, y:900},
+
   {id:'iritty_switch', name:'Iritty Switch', type:'switch', cat:'access', x:150, y:1010},
 
+
+
   // Secondary (blue) chain
+
   {id:'thazhe_chovva', name:'Thazhe Chovva', type:'place', x:1250, y:180},
-  {id:'kapad', name:'Kapad', type:'place', x:1250, y:280},
-  {id:'pallippoyil', name:'Pallippoyil', type:'place', x:1250, y:380},
+
+  {id:'kapad', name:'Kappad', type:'place', x:1250, y:280},
+
+  {id:'pallippoyil', name:'Pallipoyil', type:'place', x:1250, y:380},
+
   {id:'kothakunnumbaram', name:'Kothakunnumbaram', type:'place', x:1250, y:480},
+
   {id:'movenjeri', name:'Movenjeri', type:'place', x:1250, y:580},
-  {id:'chakkarakkal_switch', name:'Chakkarakkal Switch', type:'switch', cat:'distribution', x:1250, y:680},
+
+  {id:'chakkarakkal_switch', name:'Chakkarakkal Switch', type:'switch', cat:'distribution', x:900, y:520},
+
+
 
   // Green branch off Chakkarakkal Switch / Anjarakandy hub
-  {id:'moonuperiya', name:'Moonuperiya', type:'place', x:730, y:700},
-  {id:'mambaram', name:'Mambaram', type:'place', x:730, y:800},
+
+  {id:'moonuperiya', name:'Moonnuperiya', type:'place', x:800, y:650},
+
+  {id:'mambaram', name:'Mambaram', type:'place', x:800, y:800},
+
   {id:'kuthuparamba_switch', name:'Kuthuparamba Switch', type:'switch', cat:'distribution', x:850, y:1020},
 
-  {id:'munnuperiya', name:'Munnuperiya', type:'place', x:980, y:650,
+
+
+  {id:'munnuperiya', name:'Moonnuperiya', type:'place', x:1000, y:650,
+
     note:'Name closely resembles "Kuthuparamba" further down the chain and "Kuthuparambha" (next hop). Flagged in source sketch as a possible naming collision — confirm official spelling on Google Maps before publishing.'},
-  {id:'kuthuparambha', name:'Kuthuparambha', type:'place', x:980, y:750,
+
+  {id:'kuthuparambha', name:'Kuthuparamba', type:'place', x:1050, y:750,
+
     note:'Distinct transit place, not to be confused with Kuthuparamba Switch. Naming overlap flagged for field verification.'},
-  {id:'thalassery', name:'Thalassery', type:'place', x:980, y:850},
-  {id:'mahe_mayeezhi', name:'Mahe / Mayyazhi', type:'place', x:980, y:950},
+
+  {id:'thalassery', name:'Thalassery', type:'place', x:1050, y:850},
+
+  {id:'mahe_mayeezhi', name:'Mahe / Mayyazhi', type:'place', x:1050, y:950},
+
+
 
   // Kuthuparamba Switch outputs (orange)
+
   {id:'kolayad', name:'Kolayad', type:'place', x:650, y:1170},
+
   {id:'peravoor_switch', name:'Peravoor Switch', type:'switch', cat:'access', x:650, y:1300},
+
   {id:'gramika_switch', name:'Gramika Switch', type:'switch', cat:'access', x:850, y:1300},
+
   {id:'panoor', name:'Panoor', type:'place', x:1050, y:1170},
+
   {id:'malabar_vision_switch', name:'Malabar Vision Switch', type:'switch', cat:'access', x:1050, y:1300},
+
 ];
+
+
 
 const EDGES = [
+
   {a:'kannur_main', b:'mele_chovva', bw:100, cat:'primary', d:3.8},
+
   {a:'mele_chovva', b:'kanhirode', bw:100, cat:'primary', d:2.4},
-  {a:'kanhirode', b:'chala', bw:100, cat:'primary', d:2.9},
-  {a:'chala', b:'chakkarakkal_place', bw:100, cat:'primary', d:2.1},
+
+  {a:'kanhirode', b:'choola', bw:100, cat:'primary', d:2.9},
+
+  {a:'choola', b:'chakkarakkal_place', bw:100, cat:'primary', d:2.1},
+
   {a:'chakkarakkal_place', b:'anjarakandy', bw:100, cat:'primary', d:3.4},
+
   {a:'anjarakandy', b:'vengad', bw:100, cat:'primary', d:2.6},
+
   {a:'vengad', b:'ambilad', bw:100, cat:'primary', d:1.8},
-  {a:'ambilad', b:'airport', bw:100, cat:'neutral', d:4.2},
-  {a:'airport', b:'mattannur', bw:100, cat:'neutral', d:2.0},
-  {a:'mattannur', b:'iritty_switch', bw:100, cat:'neutral', d:6.5},
+
   {a:'ambilad', b:'kuthuparamba_switch', bw:100, cat:'primary', d:9.6},
 
+
+
   {a:'kannur_main', b:'thazhe_chovva', bw:100, cat:'secondary', d:3.5},
+
   {a:'thazhe_chovva', b:'kapad', bw:100, cat:'secondary', d:2.7},
+
   {a:'kapad', b:'pallippoyil', bw:100, cat:'secondary', d:2.3},
+
   {a:'pallippoyil', b:'kothakunnumbaram', bw:100, cat:'secondary', d:3.1},
+
   {a:'kothakunnumbaram', b:'movenjeri', bw:100, cat:'secondary', d:2.8},
+
   {a:'movenjeri', b:'chakkarakkal_switch', bw:100, cat:'secondary', d:2.2},
 
+
+
   {a:'chakkarakkal_switch', b:'anjarakandy', bw:100, cat:'chak', d:5.4},
-  {a:'anjarakandy', b:'moonuperiya', bw:100, cat:'chak', d:3.0},
-  {a:'moonuperiya', b:'mambaram', bw:100, cat:'chak', d:2.5},
-  {a:'mambaram', b:'kuthuparamba_switch', bw:100, cat:'chak', d:3.3},
-  {a:'anjarakandy', b:'munnuperiya', bw:100, cat:'chak', d:4.6},
+
+  {a:'chakkarakkal_switch', b:'moonuperiya', bw:100, cat:'neutral', d:3.0},
+
+  {a:'chakkarakkal_switch', b:'munnuperiya', bw:100, cat:'neutral', d:4.6},
+
+
+
+  {a:'anjarakandy', b:'airport', bw:100, cat:'chak', d:4.2},
+
+  {a:'airport', b:'mattannur', bw:100, cat:'chak', d:2.0},
+
+  {a:'mattannur', b:'iritty_switch', bw:100, cat:'neutral', d:6.5},
+
+
+
+  {a:'moonuperiya', b:'mambaram', bw:100, cat:'secondary', d:2.5},
+
+  {a:'mambaram', b:'kuthuparamba_switch', bw:100, cat:'secondary', d:3.3},
+
+  
+
   {a:'munnuperiya', b:'kuthuparambha', bw:100, cat:'neutral', d:2.9},
+
   {a:'kuthuparambha', b:'thalassery', bw:100, cat:'neutral', d:7.8},
+
   {a:'thalassery', b:'mahe_mayeezhi', bw:100, cat:'neutral', d:12.4},
 
+
+
   {a:'kuthuparamba_switch', b:'kolayad', bw:100, cat:'kuth', d:3.6},
+
   {a:'kolayad', b:'peravoor_switch', bw:100, cat:'neutral', d:5.1},
+
   {a:'kuthuparamba_switch', b:'gramika_switch', bw:200, cat:'kuth', d:1.2},
+
   {a:'gramika_switch', b:'kuthuparamba_switch', bw:200, cat:'kuth', d:1.2},
+
   {a:'kuthuparamba_switch', b:'panoor', bw:100, cat:'kuth', d:4.0},
+
   {a:'panoor', b:'malabar_vision_switch', bw:100, cat:'neutral', d:3.4},
+
 ];
+
+
 
 const ROUTE_ENDPOINTS = ['iritty_switch','mahe_mayeezhi','peravoor_switch','gramika_switch','malabar_vision_switch'];
 
+
+
 const CAT_COLOR = {
+
   primary:'var(--route-primary)', secondary:'var(--route-secondary)',
+
   chak:'var(--route-chak)', kuth:'var(--route-kuth)', neutral:'var(--route-neutral)'
+
 };
+
 const CAT_HEX = {
+
   primary:'#dc2626', secondary:'#2563eb', chak:'#16a34a', kuth:'#f59e0b', neutral:'#64748b'
+
 };
+
+
 
 /* ===================== LOOKUPS ===================== */
+
 const nodeById = Object.fromEntries(NODES.map(n=>[n.id,n]));
 
+
+
 function buildAdjacency(directed){
+
   const adj = {};
+
   NODES.forEach(n=>adj[n.id]=[]);
+
   EDGES.forEach(e=>{
+
     adj[e.a].push({to:e.b, edge:e, dir:'out'});
+
     if(!directed) adj[e.b].push({to:e.a, edge:e, dir:'in'});
+
   });
+
   return adj;
+
 }
+
 const adjDirected = buildAdjacency(true);
+
 const adjUndirected = buildAdjacency(false);
 
+
+
 function incomingOf(id){ return EDGES.filter(e=>e.b===id); }
+
 function outgoingOf(id){ return EDGES.filter(e=>e.a===id); }
 
+
+
 function bfsPath(startId, endId, adj){
+
   if(startId===endId) return [startId];
+
   const visited = new Set([startId]);
+
   const queue = [[startId]];
+
   while(queue.length){
+
     const path = queue.shift();
+
     const last = path[path.length-1];
+
     for(const nb of adj[last]){
+
       if(!visited.has(nb.to)){
+
         const newPath = [...path, nb.to];
+
         if(nb.to===endId) return newPath;
+
         visited.add(nb.to);
+
         queue.push(newPath);
+
       }
+
     }
+
   }
+
   return null;
+
 }
+
+
 
 function edgeBetween(a,b){
+
   return EDGES.find(e=>(e.a===a&&e.b===b)) || EDGES.find(e=>(e.a===b&&e.b===a));
+
 }
+
+
 
 /* ===================== RENDER: STAT CARDS ===================== */
+
 function renderStats(){
+
   const switches = NODES.filter(n=>n.type==='switch');
+
   const places = NODES.filter(n=>n.type==='place');
+
   const core = NODES.filter(n=>n.cat==='core').length;
+
   const dist = NODES.filter(n=>n.cat==='distribution').length;
+
   const maxBw = Math.max(...EDGES.map(e=>e.bw));
 
+
+
   const stats = [
+
     {val:switches.length, lbl:'Total Switches'},
+
     {val:places.length, lbl:'Total Places'},
+
     {val:EDGES.length, lbl:'Total Links'},
+
     {val:ROUTE_ENDPOINTS.length, lbl:'Total Routes'},
+
     {val:maxBw+' Gbps', lbl:'Max Bandwidth'},
+
     {val:core, lbl:'Core Nodes'},
+
     {val:dist, lbl:'Distribution Nodes'},
+
   ];
+
   const grid = document.getElementById('statsGrid');
+
   grid.innerHTML = stats.map((s,i)=>`
+
     <div class="stat-card" style="animation-delay:${i*60}ms">
+
       <div class="val">${s.val}</div>
+
       <div class="lbl">${s.lbl}</div>
+
     </div>`).join('');
+
 }
+
+
 
 /* ===================== RENDER: LEGEND ===================== */
+
 function renderLegend(){
+
   const items = [
+
     {type:'swatch', color:'var(--node-switch)', label:'Switch'},
+
     {type:'swatch', color:'var(--node-place)', label:'Transit Place'},
+
     {type:'line', color:CAT_COLOR.primary, label:'Primary Route (100 Gbps)'},
+
     {type:'line', color:CAT_COLOR.secondary, label:'Secondary Route (100 Gbps)'},
+
     {type:'line', color:CAT_COLOR.chak, label:'Outputs from Chakkarakkal Switch'},
+
     {type:'line', color:CAT_COLOR.kuth, label:'Outputs from Kuthuparamba Switch'},
+
     {type:'line', color:CAT_COLOR.neutral, label:'Distribution Link'},
+
   ];
+
   document.getElementById('legendRow').innerHTML = items.map(it=>`
+
     <div class="legend-item">
+
       <span class="legend-swatch ${it.type==='line'?'line':''}" style="background:${it.color};"></span>
+
       ${it.label}
+
     </div>`).join('');
+
 }
+
+
 
 /* ===================== RENDER: SVG TOPOLOGY ===================== */
+
 const svg = document.getElementById('topoSvg');
+
 const NS = 'http://www.w3.org/2000/svg';
+
 function el(tag, attrs){
+
   const e = document.createElementNS(NS, tag);
+
   for(const k in attrs) e.setAttribute(k, attrs[k]);
+
   return e;
+
 }
 
+
+
 function nodeSize(n){
+
   if(n.type==='switch') return {w:118, h:46, rx:12};
+
   return {w:112, h:38, rx:9};
+
 }
+
+
 
 function edgePoint(n){ const s=nodeSize(n); return {x:n.x, y:n.y, w:s.w, h:s.h}; }
 
+
+
+// compute edge line endpoints clipped to node borders (simple straight lines with slight offset for readability)
+
 function computeLineCoords(e){
+
   const A = nodeById[e.a], B = nodeById[e.b];
+
   const sa = nodeSize(A), sb = nodeSize(B);
+
   const dx = B.x - A.x, dy = B.y - A.y;
+
   const dist = Math.sqrt(dx*dx+dy*dy) || 1;
+
   const ux = dx/dist, uy = dy/dist;
+
+  // approximate clip using half-height/width based on direction
+
   const clipA = Math.min(sa.w/2/Math.max(Math.abs(ux),0.0001), sa.h/2/Math.max(Math.abs(uy),0.0001), 60);
+
   const clipB = Math.min(sb.w/2/Math.max(Math.abs(ux),0.0001), sb.h/2/Math.max(Math.abs(uy),0.0001), 60);
+
   return {
+
     x1: A.x + ux*clipA, y1: A.y + uy*clipA,
+
     x2: B.x - ux*clipB, y2: B.y - uy*clipB
+
   };
+
 }
+
+
 
 let edgeElements = {};
+
 let nodeElements = {};
 
+
+
 function renderTopology(){
+
   svg.innerHTML = '';
-  edgeElements = {};
-  nodeElements = {};
+
+
 
   // defs: arrowheads per category
+
   const defs = el('defs',{});
+
   Object.entries(CAT_HEX).forEach(([cat,hex])=>{
+
     const marker = el('marker',{
+
       id:'arrow-'+cat, markerWidth:8, markerHeight:8, refX:6, refY:3, orient:'auto', markerUnits:'strokeWidth'
+
     });
+
     marker.appendChild(el('path',{d:'M0,0 L6,3 L0,6 Z', fill:hex}));
+
     defs.appendChild(marker);
+
   });
+
   svg.appendChild(defs);
 
+
+
   const edgeLayer = el('g',{id:'edgeLayer'});
+
   const flowLayer = el('g',{id:'flowLayer'});
+
   const nodeLayer = el('g',{id:'nodeLayer'});
 
+
+
   EDGES.forEach((e,idx)=>{
+
     const {x1,y1,x2,y2} = computeLineCoords(e);
+
     const pathId = 'edge-path-'+idx;
+
     const path = el('path',{
+
       id:pathId,
+
       d:`M${x1},${y1} L${x2},${y2}`,
-      stroke:e.customColor || CAT_HEX[e.cat] || '#64748b',
-      'stroke-width': e.bw===200?4:2.6,
-      fill:'none',
-      'marker-end': e.customColor ? '' : 'url(#arrow-'+e.cat+')',
+
+      stroke:CAT_HEX[e.cat]||e.customColor||'#64748b', 'stroke-width': e.bw===200?4:2.6,
+
+      fill:'none', 'marker-end': e.customColor?'':'url(#arrow-'+e.cat+')',
+
       class:'edge-line', 'data-a':e.a, 'data-b':e.b
+
     });
+
+    if(e.customColor){ path.setAttribute('stroke', e.customColor); }
+
     path.style.cursor='pointer';
+
     path.addEventListener('click', (evt)=>{ evt.stopPropagation(); onEdgeClick(idx); });
+
     edgeLayer.appendChild(path);
+
     edgeElements[idx] = path;
 
+
+
     // bandwidth label
+
     const mx=(x1+x2)/2, my=(y1+y2)/2;
+
     const label = el('text',{
+
       x:mx, y:my-6, 'text-anchor':'middle', class:'mono',
-      style:`font-size:10px;font-weight:600;fill:${e.customColor||CAT_HEX[e.cat]};paint-order:stroke;stroke:var(--white);stroke-width:3px;`
+
+      style:`font-size:10px;font-weight:600;fill:${CAT_HEX[e.cat]};paint-order:stroke;stroke:var(--white);stroke-width:3px;`
+
     });
+
     label.textContent = e.bw+' Gbps';
+
     edgeLayer.appendChild(label);
 
+
+
     // flowing light dot along the path
-    const dot = el('circle',{r: e.bw===200?4:3, fill:e.customColor||CAT_HEX[e.cat], class:'flow-dot'});
+
+    const dot = el('circle',{r: e.bw===200?4:3, fill:CAT_HEX[e.cat], class:'flow-dot', style:`color:${CAT_HEX[e.cat]}`});
+
     const animMotion = el('animateMotion',{
+
       dur:(1.6 + Math.random()*1.4).toFixed(2)+'s', repeatCount:'indefinite', rotate:'auto'
+
     });
+
     const mpath = el('mpath',{});
+
     mpath.setAttributeNS('http://www.w3.org/1999/xlink','href','#'+pathId);
+
     animMotion.appendChild(mpath);
+
     dot.appendChild(animMotion);
+
     flowLayer.appendChild(dot);
+
   });
 
+
+
   NODES.forEach(n=>{
+
     const s = nodeSize(n);
+
     const g = el('g',{class:'node-group', 'data-id':n.id});
+
     g.addEventListener('click', (evt)=>{ evt.stopPropagation(); onNodeClick(n.id); });
+
     g.addEventListener('mousedown', (evt)=>{ onNodeMouseDown(evt, n.id); });
+
     g.addEventListener('mouseenter', (evt)=>showTooltip(evt, n.name));
+
     g.addEventListener('mousemove', (evt)=>moveTooltip(evt));
+
     g.addEventListener('mouseleave', hideTooltip);
 
+
+
     if(n.type==='switch'){
+
       const ring = el('circle',{
-        cx:n.x, cy:n.y, r: s.w/2+4, fill:'none',
-        stroke: n.cat==='core'?'var(--node-switch-core)':'var(--node-switch)',
+
+        cx:n.x, cy:n.y, r: s.w/2+4, fill:'none', stroke: n.cat==='core'?'var(--node-switch-core)':'var(--node-switch)',
+
         'stroke-width':2, class:'pulse-ring', opacity:0.5
+
       });
+
       g.appendChild(ring);
+
     }
 
+
+
     const rect = el('rect',{
+
       x:n.x-s.w/2, y:n.y-s.h/2, width:s.w, height:s.h, rx:s.rx,
+
       class:'node-shape',
+
       fill: n.type==='switch' ? (n.cat==='core'?'url(#coreGrad)':'url(#switchGrad)') : 'var(--node-place-bg)',
+
       stroke: n.type==='switch' ? 'none' : 'var(--node-place)',
+
       'stroke-width': n.type==='switch'?0:1.4
+
     });
+
     g.appendChild(rect);
 
+
+
     const text = el('text',{
+
       x:n.x, y:n.y, 'text-anchor':'middle', 'dominant-baseline':'middle',
-      style:`font-family:${n.type==='switch'?"'Space Grotesk'":"'Inter'"};font-size:${n.type==='switch'?11.5:10.5}px;font-weight:${n.type==='switch'?700:500};fill:${n.type==='switch'?'#ffffff':'var(--ink-700)'};pointer-events:none;`
+
+      style:`font-family:${n.type==='switch'?"'Space Grotesk'":"'Inter'"};font-size:${n.type==='switch'?11.5:10.5}px;font-weight:${n.type==='switch'?700:500};fill:${n.type==='switch'?'#ffffff':'var(--ink-700)'};`
+
     });
+
     wrapText(text, n.name, s.w-14);
+
     g.appendChild(text);
 
+
+
     nodeLayer.appendChild(g);
+
     nodeElements[n.id] = g;
+
   });
+
+
 
   // gradients for switch fills
+
   const gradDefs = el('defs',{});
+
   const g1 = el('linearGradient',{id:'switchGrad', x1:'0',y1:'0',x2:'1',y2:'1'});
+
   g1.appendChild(el('stop',{offset:'0%','stop-color':'#2563eb'}));
+
   g1.appendChild(el('stop',{offset:'100%','stop-color':'#1d4ed8'}));
+
   const g2 = el('linearGradient',{id:'coreGrad', x1:'0',y1:'0',x2:'1',y2:'1'});
+
   g2.appendChild(el('stop',{offset:'0%','stop-color':'#1e3a5f'}));
+
   g2.appendChild(el('stop',{offset:'100%','stop-color':'#0b1f3a'}));
+
   gradDefs.appendChild(g1); gradDefs.appendChild(g2);
+
   svg.appendChild(gradDefs);
 
+
+
   svg.appendChild(edgeLayer);
+
   svg.appendChild(flowLayer);
+
   svg.appendChild(nodeLayer);
+
 }
+
+
 
 function wrapText(textEl, str, maxWidth){
+
+  // simple two-line wrap by word count for node labels
+
   const words = str.split(' ');
+
   if(words.length<=1 || str.length<14){
+
     textEl.textContent = str;
+
     return;
+
   }
+
   const mid = Math.ceil(words.length/2);
+
   const line1 = words.slice(0,mid).join(' ');
+
   const line2 = words.slice(mid).join(' ');
+
   const t1 = el('tspan',{x:textEl.getAttribute('x'), dy:'-0.5em'}); t1.textContent=line1;
+
   const t2 = el('tspan',{x:textEl.getAttribute('x'), dy:'1.1em'}); t2.textContent=line2;
+
   textEl.appendChild(t1); textEl.appendChild(t2);
+
 }
 
-/* ===================== TOPOLOGY STATE RESET =====================
-   FIXED: Central function that completely resets ALL visual state on
-   the topology SVG. Called at the end of closeInfoPanel() and clearRoute().
 
-   Previously, closing the info panel only removed #overlay.show and
-   #infoPanel.open. It never cleared:
-     - .dimmed   (added by handleSearch)
-     - .highlighted (added by handleSearch AND openInfoPanel via route-active path)
-     - .route-active (added by findRoute)
-   These classes accumulated and were never cleaned up on panel close,
-   causing nodes and edges to remain faded/grey.
-============================================================= */
-function resetTopologyVisuals(){
-  // Clear all node visual state classes
-  Object.values(nodeElements).forEach(g=>{
-    g.classList.remove('dimmed', 'highlighted', 'route-active');
-    // Also explicitly reset opacity and filter in case inline styles were set
-    g.style.opacity = '';
-    g.style.filter = '';
-  });
-
-  // Clear all edge visual state classes
-  Object.values(edgeElements).forEach(p=>{
-    p.classList.remove('dimmed', 'route-active');
-    p.style.opacity = '';
-    p.style.filter = '';
-    p.style.strokeWidth = '';
-  });
-
-  // FIXED: force a browser repaint to flush any stale GPU compositing layers.
-  // On Cloudflare-hosted pages, the compositor may cache a painted frame and
-  // not repaint when only class/style attributes change. getBoundingClientRect()
-  // forces a synchronous layout + paint cycle, flushing the stale layer.
-  void svg.getBoundingClientRect();
-}
 
 /* ===================== TOOLTIP ===================== */
+
 const tooltip = document.getElementById('tooltip');
+
 function showTooltip(evt, text){ tooltip.textContent = text; tooltip.classList.add('show'); moveTooltip(evt); }
+
 function moveTooltip(evt){ tooltip.style.left = (evt.clientX+14)+'px'; tooltip.style.top = (evt.clientY+14)+'px'; }
+
 function hideTooltip(){ tooltip.classList.remove('show'); }
 
+
+
 /* ===================== ZOOM / PAN ===================== */
+
 const host = document.getElementById('svgHost');
+
 const initialVB = {x:0,y:0,w:1450,h:1400};
+
 let vb = {...initialVB};
 
+let scale = 1;
+
+
+
 function applyVB(){
+
   svg.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+
   document.getElementById('zoomReadout').textContent = 'Zoom '+Math.round((initialVB.w/vb.w)*100)+'%';
+
 }
+
 applyVB();
 
+
+
 function zoomBy(factor, cx, cy){
+
   const rect = host.getBoundingClientRect();
+
   const px = cx!==undefined ? (cx-rect.left)/rect.width : 0.5;
+
   const py = cy!==undefined ? (cy-rect.top)/rect.height : 0.5;
+
   const newW = Math.min(Math.max(vb.w/factor, 300), 3200);
+
   const newH = newW * (vb.h/vb.w);
+
   const fx = vb.x + px*vb.w;
+
   const fy = vb.y + py*vb.h;
+
   vb = { x: fx - px*newW, y: fy - py*newH, w:newW, h:newH };
+
   applyVB();
+
 }
+
+
 
 host.addEventListener('wheel', (evt)=>{
+
   evt.preventDefault();
+
   const factor = evt.deltaY < 0 ? 1.12 : 0.89;
+
   zoomBy(factor, evt.clientX, evt.clientY);
+
 }, {passive:false});
 
+
+
 let isPanning = false, panStart = {x:0,y:0}, vbStart = {...vb};
+
 host.addEventListener('mousedown', (evt)=>{
+
   isPanning = true; panStart = {x:evt.clientX, y:evt.clientY}; vbStart = {...vb};
+
 });
+
 window.addEventListener('mousemove', (evt)=>{
+
   if(!isPanning) return;
+
   const rect = host.getBoundingClientRect();
+
   const dx = (evt.clientX - panStart.x) * (vb.w/rect.width);
+
   const dy = (evt.clientY - panStart.y) * (vb.h/rect.height);
+
   vb = {...vbStart, x: vbStart.x - dx, y: vbStart.y - dy};
+
   applyVB();
+
 });
+
 window.addEventListener('mouseup', ()=>isPanning=false);
 
+
+
 // touch support (basic single-finger pan)
+
 host.addEventListener('touchstart', (evt)=>{
+
   if(evt.touches.length===1){ isPanning=true; panStart={x:evt.touches[0].clientX,y:evt.touches[0].clientY}; vbStart={...vb}; }
+
 }, {passive:true});
+
 host.addEventListener('touchmove', (evt)=>{
+
   if(!isPanning || evt.touches.length!==1) return;
+
   const rect = host.getBoundingClientRect();
+
   const dx = (evt.touches[0].clientX - panStart.x) * (vb.w/rect.width);
+
   const dy = (evt.touches[0].clientY - panStart.y) * (vb.h/rect.height);
+
   vb = {...vbStart, x: vbStart.x - dx, y: vbStart.y - dy};
+
   applyVB();
+
 }, {passive:true});
+
 host.addEventListener('touchend', ()=>isPanning=false);
 
+
+
 function fitToScreen(){ vb = {...initialVB}; applyVB(); }
+
 function resetView(){ vb = {...initialVB}; applyVB(); }
 
+
+
 function toggleFullscreen(){
+
   const card = document.querySelector('.topo-card');
+
   if(!document.fullscreenElement){ card.requestFullscreen?.(); }
+
   else{ document.exitFullscreen?.(); }
+
 }
+
+
 
 /* ===================== SEARCH ===================== */
+
 function handleSearch(q){
+
   q = q.trim().toLowerCase();
+
+  const allNodes = Object.values(nodeElements);
+
+  const allEdges = Object.values(edgeElements);
+
   if(!q){
-    // FIXED: clear ALL topology state when search is cleared, not just classes
-    resetTopologyVisuals();
+
+    allNodes.forEach(g=>g.classList.remove('dimmed','highlighted'));
+
+    allEdges.forEach(p=>p.classList.remove('dimmed'));
+
     return;
+
   }
+
+  let matchedAny = false;
+
   NODES.forEach(n=>{
+
     const match = n.name.toLowerCase().includes(q) || n.id.includes(q);
+
     const g = nodeElements[n.id];
-    if(!g) return;
+
     g.classList.toggle('dimmed', !match);
+
     g.classList.toggle('highlighted', match);
+
+    if(match) matchedAny = true;
+
   });
-  Object.values(edgeElements).forEach(p=>p.classList.add('dimmed'));
+
+  allEdges.forEach(p=>p.classList.add('dimmed'));
+
 }
 
+
+
 /* ===================== ROUTE EXPLORER ===================== */
+
 function populateSelects(){
+
   const opts = NODES.slice().sort((a,b)=>a.name.localeCompare(b.name))
+
     .map(n=>`<option value="${n.id}">${n.name} (${n.type==='switch'?'Switch':'Place'})</option>`).join('');
+
   document.getElementById('startSelect').innerHTML = opts;
+
   document.getElementById('endSelect').innerHTML = opts;
+
   document.getElementById('startSelect').value = 'kannur_main';
+
   document.getElementById('endSelect').value = 'malabar_vision_switch';
+
 }
+
+
 
 let activeRouteEdges = [];
 
+
+
 function clearRoute(){
-  // FIXED: use resetTopologyVisuals() instead of manually removing only route-active
-  // The old code only removed .route-active but left .dimmed and .highlighted from
-  // search state, which could interact with route highlighting unexpectedly.
-  activeRouteEdges = [];
-  document.getElementById('routeResult').classList.remove('show');
-  // Only reset route classes, not search classes (search may still be active)
+
+  activeRouteEdges.forEach(idx=>edgeElements[idx].classList.remove('route-active'));
+
   Object.values(nodeElements).forEach(g=>g.classList.remove('route-active'));
-  Object.values(edgeElements).forEach(p=>p.classList.remove('route-active'));
-  void svg.getBoundingClientRect();
+
+  activeRouteEdges = [];
+
+  document.getElementById('routeResult').classList.remove('show');
+
 }
+
+
 
 function findRoute(){
+
   clearRoute();
+
   const start = document.getElementById('startSelect').value;
+
   const end = document.getElementById('endSelect').value;
+
   const path = bfsPath(start, end, adjUndirected);
+
   if(!path){
+
     alert('No fiber path found between these two nodes.');
+
     return;
+
   }
+
   let totalDist = 0, minBw = Infinity;
+
   const hopsHtml = [];
+
   for(let i=0;i<path.length;i++){
+
     const id = path[i];
+
     nodeElements[id].classList.add('route-active');
+
     let segText = '';
+
     if(i>0){
+
       const e = edgeBetween(path[i-1], id);
+
       const idx = EDGES.indexOf(e);
+
       activeRouteEdges.push(idx);
+
       edgeElements[idx].classList.add('route-active');
+
       totalDist += e.d;
+
       minBw = Math.min(minBw, e.bw);
+
       segText = e.d.toFixed(1)+' km · '+e.bw+' Gbps';
+
     }
+
     hopsHtml.push(`<div class="route-hop"><span class="dot"></span><span class="route-hop-name">${nodeById[id].name}</span>${segText?`<span class="seg">${segText}</span>`:''}</div>`);
+
   }
+
   document.getElementById('rHops').textContent = (path.length-1)+' hops';
+
   document.getElementById('rDist').textContent = totalDist.toFixed(1)+' km';
+
   document.getElementById('rBw').textContent = (minBw===Infinity?0:minBw)+' Gbps min';
+
   document.getElementById('routeHops').innerHTML = hopsHtml.join('');
+
   document.getElementById('routeResult').classList.add('show');
+
 }
 
+
+
 /* ===================== INFO PANEL ===================== */
+
 function openInfoPanel(id){
+
   const n = nodeById[id];
+
   const incoming = incomingOf(id);
+
   const outgoing = outgoingOf(id);
+
   const connected = new Set([...incoming.map(e=>e.a), ...outgoing.map(e=>e.b)]);
+
   const routeFromCore = bfsPath('kannur_main', id, adjDirected) || bfsPath('kannur_main', id, adjUndirected);
+
   let coreDist = 0;
+
   if(routeFromCore){
+
     for(let i=1;i<routeFromCore.length;i++){
+
       const e = edgeBetween(routeFromCore[i-1], routeFromCore[i]);
+
       if(e) coreDist += e.d;
+
     }
+
   }
+
   const maxCapacity = Math.max(0, ...incoming.map(e=>e.bw), ...outgoing.map(e=>e.bw));
 
+
+
   const html = `
+
     <span class="info-badge ${n.type}">${n.type==='switch'?'Switch':'Transit Place'}${n.cat?(' · '+n.cat):''}</span>
+
     <h2>${n.name}</h2>
+
     <div class="info-status"><span class="sd"></span>Active — Link Up</div>
 
+
+
     <div class="info-grid">
+
       <div class="info-tile"><div class="t-lbl">Connected Nodes</div><div class="t-val">${connected.size}</div></div>
+
       <div class="info-tile"><div class="t-lbl">Fiber Capacity</div><div class="t-val">${maxCapacity} Gbps</div></div>
+
       <div class="info-tile"><div class="t-lbl">Distance from Core</div><div class="t-val">${coreDist.toFixed(1)} km</div></div>
+
       <div class="info-tile"><div class="t-lbl">Hops from Core</div><div class="t-val">${routeFromCore?routeFromCore.length-1:'—'}</div></div>
+
     </div>
+
+
 
     ${n.note?`<div class="info-section"><div class="advisory">⚠ ${n.note}</div></div>`:''}
 
+
+
     <div class="info-section">
+
       <h4>Incoming Links (${incoming.length})</h4>
+
       ${incoming.length? incoming.map(e=>`
+
         <div class="link-row"><span class="ln">${nodeById[e.a].name}</span><span class="lm">${e.bw} Gbps · ${e.d.toFixed(1)} km</span></div>
+
       `).join('') : '<p class="empty-note">No incoming links — origin node.</p>'}
+
     </div>
 
+
+
     <div class="info-section">
+
       <h4>Outgoing Links (${outgoing.length})</h4>
+
       ${outgoing.length? outgoing.map(e=>`
+
         <div class="link-row"><span class="ln">${nodeById[e.b].name}</span><span class="lm">${e.bw} Gbps · ${e.d.toFixed(1)} km</span></div>
+
       `).join('') : '<p class="empty-note">No outgoing links — end of line.</p>'}
+
     </div>
 
+
+
     <div class="info-section">
+
       <h4>Route from Kannur Main Switch</h4>
+
       ${routeFromCore ? `<p class="empty-note mono" style="line-height:1.7;">${routeFromCore.map(rid=>nodeById[rid].name).join(' → ')}</p>` : '<p class="empty-note">Not reachable.</p>'}
+
     </div>
+
   `;
+
   document.getElementById('infoContent').innerHTML = html;
+
   document.getElementById('infoPanel').classList.add('open');
+
   document.getElementById('overlay').classList.add('show');
+
 }
 
-/* FIXED: closeInfoPanel now does complete topology cleanup.
-   Previously it only toggled two CSS classes (.open on panel, .show on overlay).
-   It never cleared .dimmed / .highlighted / .route-active from SVG elements,
-   so those accumulated silently and rendered as a grey/faded topology. */
 function closeInfoPanel(){
+
   document.getElementById('infoPanel').classList.remove('open');
+
   document.getElementById('overlay').classList.remove('show');
 
-  // FIXED: clear all SVG visual state added during or before panel open
-  // This covers: search dimming, node highlighting, route highlighting
-  resetTopologyVisuals();
-
-  // FIXED: also clear search input state so the topology matches the cleared visual
-  // (if user searched, opened a node, then closed — search classes would remain
-  //  but the visual would now be reset, creating a mismatch next time they type)
-  // We do NOT clear the input text (user may want to continue searching),
-  // but we reapply the current search state so the display is consistent.
-  const currentSearch = document.getElementById('searchInput').value.trim();
-  if(currentSearch){
-    // Re-apply search highlighting so it's consistent after reset
-    requestAnimationFrame(()=>handleSearch(currentSearch));
-  }
 }
+
+
 
 /* ===================== THEME ===================== */
+
 function toggleTheme(){
+
   const html = document.documentElement;
+
   const next = html.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+
   html.setAttribute('data-theme', next);
+
   localStorage.setItem('kv-theme', next);
+
   document.getElementById('themeBtn').classList.toggle('active', next==='dark');
+
 }
+
 (function initTheme(){
+
   const saved = localStorage.getItem('kv-theme');
+
   if(saved){
+
     document.documentElement.setAttribute('data-theme', saved);
+
     if(saved==='dark') document.getElementById('themeBtn')?.classList.add('active');
+
   }
+
 })();
+
+
 
 /* ===================== EXPORT SVG ===================== */
+
 function exportSVG(){
+
   const clone = svg.cloneNode(true);
+
   clone.setAttribute('xmlns', NS);
+
   clone.setAttribute('style', 'background:#ffffff');
+
   const serializer = new XMLSerializer();
+
   let src = serializer.serializeToString(clone);
+
   src = '<?xml version="1.0" standalone="no"?>\r\n' + src;
+
   const blob = new Blob([src], {type:'image/svg+xml;charset=utf-8'});
+
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement('a');
+
   a.href = url; a.download = 'kannur-vision-topology.svg';
+
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
   URL.revokeObjectURL(url);
+
 }
+
+
 
 /* =========================================================
+
    ADMIN EDITING SYSTEM
+
 ========================================================= */
+
 const ADMIN_PASSWORD = 'adish@123';
+
 let isAdmin = false;
+
 let currentTool = null;
+
 let selectedNodeId = null;
+
 let selectedEdgeIndex = null;
+
 let routeFirstNode = null;
+
 let idCounter = 1;
 
+
+
 /* ---- history (undo/redo) ---- */
+
 let history = [];
+
 let historyIndex = -1;
+
 let lastSavedSnapshot = null;
 
+
+
 function snapshot(){
+
   return JSON.stringify({NODES, EDGES});
+
 }
+
 function restoreSnapshot(json){
+
   const data = JSON.parse(json);
+
   NODES.length = 0; NODES.push(...data.NODES);
+
   EDGES.length = 0; EDGES.push(...data.EDGES);
+
   rebuildLookups();
+
   fullRefresh();
+
 }
+
 function pushHistory(){
+
   history = history.slice(0, historyIndex+1);
+
   history.push(snapshot());
+
   historyIndex = history.length-1;
+
 }
+
 function undoChange(){
+
   if(historyIndex<=0){ flashHint('Nothing to undo'); return; }
+
   historyIndex--;
+
   restoreSnapshot(history[historyIndex]);
+
   flashHint('Undo applied');
+
 }
+
 function redoChange(){
+
   if(historyIndex>=history.length-1){ flashHint('Nothing to redo'); return; }
+
   historyIndex++;
+
   restoreSnapshot(history[historyIndex]);
+
   flashHint('Redo applied');
+
 }
+
+
 
 function rebuildLookups(){
+
   Object.keys(nodeById).forEach(k=>delete nodeById[k]);
+
   NODES.forEach(n=>nodeById[n.id]=n);
+
   Object.keys(adjDirected).forEach(k=>delete adjDirected[k]);
+
   Object.keys(adjUndirected).forEach(k=>delete adjUndirected[k]);
+
   const dA = buildAdjacency(true), uA = buildAdjacency(false);
+
   Object.assign(adjDirected, dA);
+
   Object.assign(adjUndirected, uA);
+
 }
+
+
 
 function fullRefresh(){
+
   renderStats();
+
   renderTopology();
+
   populateSelects();
+
   clearRoute();
+
   closeInfoPanel();
+
   closeAdminEditPanel();
+
   selectedNodeId = null; selectedEdgeIndex = null;
+
 }
+
+
 
 /* ---- hint bubble ---- */
+
 let hintTimer = null;
+
 function flashHint(msg, persist){
+
   const h = document.getElementById('toolHint');
+
   h.textContent = msg;
+
   h.classList.add('show');
+
   if(hintTimer) clearTimeout(hintTimer);
+
   if(!persist) hintTimer = setTimeout(()=>h.classList.remove('show'), 2200);
+
 }
+
 function clearHint(){ document.getElementById('toolHint').classList.remove('show'); }
 
+
+
 /* ---- modal helpers ---- */
+
 function openModal(id){ document.getElementById(id).classList.add('show'); }
+
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 
+
+
 /* ---- ADMIN LOGIN ---- */
+
 function openAdminLogin(){
+
   if(isAdmin){ logoutAdmin(); return; }
+
   document.getElementById('loginMsg').textContent='';
+
   document.getElementById('adminPasswordInput').value='';
+
   openModal('loginModal');
+
   setTimeout(()=>document.getElementById('adminPasswordInput').focus(), 80);
+
 }
+
 function submitAdminLogin(){
+
   const val = document.getElementById('adminPasswordInput').value;
+
   if(val === ADMIN_PASSWORD){
+
     isAdmin = true;
+
     closeModal('loginModal');
+
     document.getElementById('adminBadge').style.display='flex';
+
     document.getElementById('adminToolbar').classList.add('show');
+
     document.getElementById('adminAccessBtn').textContent = '🔓 Exit Admin';
+
     document.getElementById('adminAccessBtn').classList.add('on');
+
     lastSavedSnapshot = localStorage.getItem('kv-topology-data') || snapshot();
+
     history = [snapshot()]; historyIndex = 0;
+
     flashHint('🟢 Admin Mode Active');
+
   } else {
+
     document.getElementById('loginMsg').textContent = '❌ Incorrect Password';
+
   }
+
 }
+
 function logoutAdmin(){
+
   isAdmin = false;
+
   currentTool = null;
+
   document.getElementById('adminBadge').style.display='none';
+
   document.getElementById('adminToolbar').classList.remove('show');
+
   document.getElementById('adminAccessBtn').textContent = '🔒 Admin Access';
+
   document.getElementById('adminAccessBtn').classList.remove('on');
+
   closeAdminEditPanel();
+
   clearToolHighlight();
+
   clearHint();
+
 }
+
+
 
 /* ---- TOOL SELECTION ---- */
+
 function clearToolHighlight(){
+
   document.querySelectorAll('.admin-toolbar button').forEach(b=>b.classList.remove('active-tool'));
+
 }
+
 function setTool(tool){
+
   if(!isAdmin) return;
+
   currentTool = (currentTool===tool) ? null : tool;
+
   routeFirstNode = null;
+
   clearToolHighlight();
+
   if(currentTool){
+
     const btn = document.querySelector(`.admin-toolbar button[data-tool="${currentTool}"]`);
+
     if(btn) btn.classList.add('active-tool');
+
     const labels = {
+
       createSwitch:'Click anywhere on the map to place a new switch',
+
       createPlace:'Click anywhere on the map to place a new transit place',
+
       createRoute:'Select the first node, then the second node to connect',
+
       moveNode:'Select the first node, then the second node to connect',
+
       moveOnly:'Drag any node to reposition it',
+
       deleteConnection:'Click a route line to delete it',
+
       changeColor:'Click a route line to change its color'
+
     };
+
     flashHint(labels[currentTool] || '', true);
+
   } else {
+
     clearHint();
+
   }
+
 }
+
+
 
 /* ---- svg coordinate helper ---- */
+
 function svgPointFromEvent(evt){
+
   const pt = svg.createSVGPoint();
+
   pt.x = evt.clientX; pt.y = evt.clientY;
+
   const ctm = svg.getScreenCTM();
+
   const loc = pt.matrixTransform(ctm.inverse());
+
   return {x: loc.x, y: loc.y};
+
 }
+
+
 
 /* ---- SVG background click (create nodes) ---- */
+
 svg.addEventListener('click', (evt)=>{
+
   if(!isAdmin || !currentTool) return;
+
   if(evt.target !== svg) return; // only empty canvas clicks
+
   if(currentTool==='createSwitch' || currentTool==='createPlace'){
+
     const p = svgPointFromEvent(evt);
+
     createNodeAt(currentTool==='createSwitch'?'switch':'place', p.x, p.y);
+
   }
+
 });
+
+
 
 function createNodeAt(type, x, y){
+
   pushHistory();
+
   const id = (type==='switch'?'switch_':'place_') + (idCounter++) + '_' + Date.now().toString(36).slice(-4);
+
   const node = {
+
     id, name: type==='switch' ? 'New Switch' : 'New Place', type,
+
     x: Math.round(x), y: Math.round(y),
+
     status:'active', description:'', bandwidth:'', lat:'', lng:'', notes:''
+
   };
+
   if(type==='switch') node.cat='access';
+
   NODES.push(node);
+
   rebuildLookups();
+
   renderStats(); renderTopology(); populateSelects();
+
   pushHistory();
+
   selectedNodeId = id;
+
   openAdminEditPanel(id);
+
   flashHint('Node created — edit its details, then Apply');
+
 }
+
+
 
 /* ---- NODE CLICK ROUTING ---- */
+
 function onNodeClick(id){
+
   if(!isAdmin){ openInfoPanel(id); return; }
+
   if(currentTool==='createRoute' || currentTool==='moveNode'){
+
     handleRouteSelectionClick(id);
+
     return;
+
   }
+
   if(currentTool==='deleteConnection' || currentTool==='changeColor'){
-    return;
+
+    return; // these operate on edges, ignore node clicks
+
   }
+
   selectedNodeId = id;
+
   openInfoPanel(id);
+
   openAdminEditPanel(id);
+
 }
+
+
 
 function handleRouteSelectionClick(id){
+
   if(!routeFirstNode){
+
     routeFirstNode = id;
+
     nodeElements[id].classList.add('highlighted');
+
     flashHint('Now select the second node', true);
+
   } else if(routeFirstNode===id){
+
     nodeElements[id].classList.remove('highlighted');
+
     routeFirstNode = null;
+
   } else {
+
     pendingRouteA = routeFirstNode; pendingRouteB = id;
+
     nodeElements[routeFirstNode].classList.remove('highlighted');
+
     routeFirstNode = null;
+
     openRouteModal();
+
   }
+
 }
+
+
 
 /* ---- CREATE ROUTE MODAL ---- */
+
 let pendingRouteA=null, pendingRouteB=null;
+
 const ROUTE_COLORS = ['#dc2626','#2563eb','#16a34a','#f59e0b','#8b5cf6','#0891b2','#64748b','#0b1f3a'];
+
 let chosenRouteColor = ROUTE_COLORS[0];
+
 function openRouteModal(){
+
   document.getElementById('routeBwSelect').value='100';
+
   document.getElementById('routeBwCustom').style.display='none';
+
   document.getElementById('routeBwCustom').value='';
+
   chosenRouteColor = ROUTE_COLORS[0];
+
   document.getElementById('routeColorRow').innerHTML = ROUTE_COLORS.map(c=>
+
     `<div class="color-swatch${c===chosenRouteColor?' sel':''}" style="background:${c}" onclick="pickRouteColor('${c}', this)"></div>`).join('');
+
   openModal('routeModal');
+
 }
+
 function pickRouteColor(c, elm){
+
   chosenRouteColor = c;
+
   document.querySelectorAll('#routeColorRow .color-swatch').forEach(s=>s.classList.remove('sel'));
+
   elm.classList.add('sel');
+
 }
+
 document.getElementById('routeBwSelect')?.addEventListener('change', function(){
+
   document.getElementById('routeBwCustom').style.display = this.value==='custom' ? 'block':'none';
+
 });
+
 function confirmCreateRoute(){
+
   if(!pendingRouteA || !pendingRouteB) return closeModal('routeModal');
+
   const sel = document.getElementById('routeBwSelect').value;
+
   let bw = sel==='custom' ? parseFloat(document.getElementById('routeBwCustom').value)||100 : parseInt(sel);
+
   pushHistory();
+
   const A = nodeById[pendingRouteA], B = nodeById[pendingRouteB];
+
   let dist = 0;
+
   if(A.lat && A.lng && B.lat && B.lng){
+
     dist = haversine(parseFloat(A.lat), parseFloat(A.lng), parseFloat(B.lat), parseFloat(B.lng));
+
   } else {
+
     dist = Math.round((Math.hypot(A.x-B.x, A.y-B.y)/40)*10)/10;
+
   }
+
   EDGES.push({a:pendingRouteA, b:pendingRouteB, bw, cat:'neutral', d:dist, customColor:chosenRouteColor});
+
   pendingRouteA=null; pendingRouteB=null;
+
   closeModal('routeModal');
+
   renderStats(); renderTopology(); populateSelects();
+
   pushHistory();
+
   flashHint('Route created');
+
 }
+
 function haversine(lat1,lon1,lat2,lon2){
+
   const R=6371, toRad=d=>d*Math.PI/180;
+
   const dLat=toRad(lat2-lat1), dLon=toRad(lon2-lon1);
+
   const a=Math.sin(dLat/2)**2 + Math.cos(toRad(lat1))*Math.cos(toRad(lat2))*Math.sin(dLon/2)**2;
+
   return Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*10)/10;
+
 }
+
+
 
 /* ---- EDGE CLICK (delete / recolor) ---- */
+
 function onEdgeClick(idx){
+
   if(!isAdmin) return;
+
   if(currentTool==='deleteConnection'){
+
     if(confirm('Delete this connection?')){
+
       pushHistory();
+
       EDGES.splice(idx,1);
+
       renderStats(); renderTopology(); populateSelects();
+
       pushHistory();
+
       flashHint('Connection deleted');
+
     }
+
     return;
+
   }
+
   if(currentTool==='changeColor'){
+
     selectedEdgeIndex = idx;
+
     document.getElementById('edgeColorRow').innerHTML = ROUTE_COLORS.map(c=>
+
       `<div class="color-swatch" style="background:${c}" onclick="applyEdgeColor(${idx}, '${c}')"></div>`).join('');
+
     openModal('edgeColorModal');
+
     return;
+
   }
+
   selectedEdgeIndex = idx;
+
 }
+
 function applyEdgeColor(idx, color){
+
   pushHistory();
+
   EDGES[idx].customColor = color;
+
   closeModal('edgeColorModal');
+
   renderTopology();
+
   pushHistory();
+
   flashHint('Route color updated');
+
 }
+
+
 
 /* ---- NODE DRAG (MOVE) ---- */
+
 let dragState = null;
+
 function onNodeMouseDown(evt, id){
+
   if(!isAdmin) return;
+
   evt.stopPropagation();
+
   if(currentTool==='createRoute' || currentTool==='moveNode' || currentTool==='deleteConnection' || currentTool==='changeColor' || currentTool==='createSwitch' || currentTool==='createPlace') return;
+
   evt.preventDefault();
+
   const p = svgPointFromEvent(evt);
+
   const n = nodeById[id];
+
   dragState = { id, offsetX: p.x - n.x, offsetY: p.y - n.y, moved:false };
+
 }
+
 window.addEventListener('mousemove', (evt)=>{
+
   if(!dragState) return;
+
   const p = svgPointFromEvent(evt);
+
   const n = nodeById[dragState.id];
+
   n.x = Math.round(p.x - dragState.offsetX);
+
   n.y = Math.round(p.y - dragState.offsetY);
+
   dragState.moved = true;
+
   requestAnimationFrame(updateNodePositionFast.bind(null, dragState.id));
+
 });
+
 window.addEventListener('mouseup', ()=>{
+
   if(dragState && dragState.moved){
+
     pushHistory();
+
   }
+
   dragState = null;
+
 });
+
+
 
 function updateNodePositionFast(id){
+
   const n = nodeById[id];
+
   if(!n) return;
+
   const g = nodeElements[id];
+
   if(!g) return;
+
   const s = nodeSize(n);
+
   const rect = g.querySelector('rect.node-shape');
+
   if(rect){ rect.setAttribute('x', n.x-s.w/2); rect.setAttribute('y', n.y-s.h/2); }
+
   const ring = g.querySelector('circle.pulse-ring');
+
   if(ring){ ring.setAttribute('cx', n.x); ring.setAttribute('cy', n.y); }
+
   const text = g.querySelector('text');
+
   if(text){
+
     text.setAttribute('x', n.x); text.setAttribute('y', n.y);
+
     Array.from(text.querySelectorAll('tspan')).forEach(t=>t.setAttribute('x', n.x));
+
   }
+
+  // update connected edges
+
   EDGES.forEach((e,idx)=>{
+
     if(e.a!==id && e.b!==id) return;
+
     const {x1,y1,x2,y2} = computeLineCoords(e);
+
     const path = edgeElements[idx];
+
     if(path) path.setAttribute('d', `M${x1},${y1} L${x2},${y2}`);
+
   });
+
+  // reposition bandwidth labels + flow dots by simplest approach: full label/dot pass only for affected edges
+
   refreshEdgeLabelsFor(id);
+
 }
+
 function refreshEdgeLabelsFor(nodeId){
+
   const labels = svg.querySelectorAll('#edgeLayer text');
+
   EDGES.forEach((e,idx)=>{
+
     if(e.a!==nodeId && e.b!==nodeId) return;
+
     const {x1,y1,x2,y2} = computeLineCoords(e);
+
     const mx=(x1+x2)/2, my=(y1+y2)/2;
+
     if(labels[idx]){ labels[idx].setAttribute('x', mx); labels[idx].setAttribute('y', my-6); }
+
   });
+
 }
+
+
 
 /* ---- EDIT SELECTED NODE PANEL ---- */
+
 function openAdminEditPanel(id){
+
   if(!isAdmin) return;
+
   const n = nodeById[id];
+
   if(!n) return;
+
   selectedNodeId = id;
+
   document.getElementById('editName').value = n.name||'';
+
   document.getElementById('editType').value = n.type||'place';
+
   document.getElementById('editBandwidth').value = n.bandwidth||'';
+
   document.getElementById('editStatus').value = n.status||'active';
+
   document.getElementById('editDescription').value = n.description||'';
+
   document.getElementById('editLat').value = n.lat||'';
+
   document.getElementById('editLng').value = n.lng||'';
+
   document.getElementById('editNotes').value = n.notes||'';
+
   document.getElementById('adminEditPanel').classList.add('open');
+
 }
+
 function closeAdminEditPanel(){
+
   document.getElementById('adminEditPanel').classList.remove('open');
+
 }
+
 function editSelectedNode(){
+
   if(!selectedNodeId){ flashHint('Select a node first'); return; }
+
   openAdminEditPanel(selectedNodeId);
+
 }
+
 function applyNodeEdit(){
+
   if(!selectedNodeId) return;
+
   pushHistory();
+
   const n = nodeById[selectedNodeId];
+
   n.name = document.getElementById('editName').value.trim() || n.name;
+
   n.type = document.getElementById('editType').value;
+
   n.bandwidth = document.getElementById('editBandwidth').value.trim();
+
   n.status = document.getElementById('editStatus').value;
+
   n.description = document.getElementById('editDescription').value.trim();
+
   n.lat = document.getElementById('editLat').value.trim();
+
   n.lng = document.getElementById('editLng').value.trim();
+
   n.notes = document.getElementById('editNotes').value.trim();
+
   renderStats(); renderTopology(); populateSelects();
+
   pushHistory();
+
   flashHint('Node updated');
+
 }
+
 function renameSelectedNode(){
+
   if(!selectedNodeId){ flashHint('Select a node first'); return; }
+
   const n = nodeById[selectedNodeId];
+
   const newName = prompt('New name for this node:', n.name);
+
   if(newName && newName.trim()){
+
     pushHistory();
+
     n.name = newName.trim();
+
     renderStats(); renderTopology(); populateSelects();
+
     pushHistory();
+
     flashHint('Node renamed');
+
   }
+
 }
+
 function deleteSelectedNode(){
+
   if(!selectedNodeId){ flashHint('Select a node first'); return; }
+
   if(!confirm('Delete this node and all its connections?')) return;
+
   pushHistory();
+
   const id = selectedNodeId;
+
   for(let i=EDGES.length-1;i>=0;i--){ if(EDGES[i].a===id || EDGES[i].b===id) EDGES.splice(i,1); }
+
   const ni = NODES.findIndex(n=>n.id===id);
+
   if(ni>-1) NODES.splice(ni,1);
+
   selectedNodeId = null;
+
   rebuildLookups();
+
   renderStats(); renderTopology(); populateSelects();
+
   closeAdminEditPanel(); closeInfoPanel();
+
   pushHistory();
+
   flashHint('Node deleted');
+
 }
+
+
 
 /* ---- SAVE / CANCEL ---- */
+
 function saveChanges(){
+
   localStorage.setItem('kv-topology-data', snapshot());
+
   lastSavedSnapshot = snapshot();
+
   flashHint('💾 Changes saved');
+
 }
+
 function cancelChanges(){
+
   if(!confirm('Discard all unsaved changes and restore the last saved state?')) return;
+
   restoreSnapshot(lastSavedSnapshot);
+
   history = [lastSavedSnapshot]; historyIndex = 0;
+
   flashHint('Changes discarded');
+
 }
+
+
 
 /* ---- EXPORT / IMPORT JSON ---- */
+
 function exportJSON(){
+
   const data = JSON.stringify({NODES, EDGES}, null, 2);
+
   const blob = new Blob([data], {type:'application/json'});
+
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement('a');
+
   a.href=url; a.download='kannur-vision-topology.json';
+
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
   URL.revokeObjectURL(url);
+
 }
+
 function importJSON(file){
+
   if(!file) return;
+
   const reader = new FileReader();
+
   reader.onload = ()=>{
+
     try{
+
       const data = JSON.parse(reader.result);
+
       if(!data.NODES || !data.EDGES) throw new Error('Invalid file');
+
       pushHistory();
+
       restoreSnapshot(JSON.stringify(data));
+
       pushHistory();
+
       flashHint('JSON imported');
+
     }catch(err){
+
       alert('Could not import file: '+err.message);
+
     }
+
   };
+
   reader.readAsText(file);
+
 }
+
+
 
 /* ---- EXPORT PNG ---- */
+
 function exportPNG(){
+
   const clone = svg.cloneNode(true);
+
   clone.setAttribute('xmlns', NS);
+
   const bbox = svg.viewBox.baseVal;
+
   const serializer = new XMLSerializer();
+
   const src = serializer.serializeToString(clone);
+
   const svgBlob = new Blob([src], {type:'image/svg+xml;charset=utf-8'});
+
   const url = URL.createObjectURL(svgBlob);
+
   const img = new Image();
+
   img.onload = ()=>{
+
     const canvas = document.createElement('canvas');
+
     canvas.width = bbox.width; canvas.height = bbox.height;
+
     const ctx = canvas.getContext('2d');
+
     ctx.fillStyle = '#ffffff';
+
     ctx.fillRect(0,0,canvas.width,canvas.height);
+
     ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
     URL.revokeObjectURL(url);
+
     canvas.toBlob(blob=>{
+
       const a = document.createElement('a');
+
       a.href = URL.createObjectURL(blob);
+
       a.download = 'kannur-vision-topology.png';
+
       document.body.appendChild(a); a.click(); document.body.removeChild(a);
+
     });
+
   };
+
   img.src = url;
+
 }
 
+
+
 /* ---- LOAD SAVED STATE ON PAGE LOAD ---- */
+
 (function initAdminData(){
+
   const saved = localStorage.getItem('kv-topology-data');
+
   if(saved){
+
     try{
+
       const data = JSON.parse(saved);
+
       if(data.NODES && data.EDGES){
+
         NODES.length = 0; NODES.push(...data.NODES);
+
         EDGES.length = 0; EDGES.push(...data.EDGES);
+
       }
+
     }catch(e){}
+
   }
+
 })();
 
+
+
 /* ===================== INIT ===================== */
+
 renderStats();
+
 renderLegend();
+
 renderTopology();
+
 populateSelects();
+
 window.addEventListener('resize', ()=>{ /* viewBox is responsive, no-op */ });
+
 </script>
 
 </body>
+
 </html>
